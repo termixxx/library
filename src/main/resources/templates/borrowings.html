@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учёт выдачи книг</title>
+    <link rel="stylesheet" href="../static/style/borrowings.css">
+</head>
+<body>
+<h1>Учёт выдачи книг</h1>
+
+<div id="borrowForm">
+    <form id="newBorrowingForm">
+        <label for="clientId">Читатель:</label>
+        <select id="clientId" required>
+            <option value="">Выберите читателя</option>
+            <option th:each="client : ${clients}"
+                    th:value="${client.id}"
+                    th:text="${client.fullName}"></option>
+        </select><br>
+
+        <label for="bookId">Книга:</label>
+        <select id="bookId" required>
+            <option value="">Выберите книгу</option>
+            <option th:each="book : ${books}"
+                    th:value="${book.id}"
+                    th:text="${book.title + ' - ' + book.author}"></option>
+        </select><br>
+
+        <label for="borrowDate">Дата выдачи:</label>
+        <input type="date" id="borrowDate" required><br>
+
+        <button type="submit" class="action-btn">Выдать книгу</button>
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+    </form>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Читатель</th>
+        <th>Книга</th>
+        <th>Дата выдачи</th>
+        <th>Дата возврата</th>
+        <th>Действие</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="borrowing : ${borrowings}" th:attr="data-borrowing-id=${borrowing.id}">
+        <td th:text="${borrowing.client.fullName}"></td>
+        <td th:text="${borrowing.book.title + ' -- ' + borrowing.book.author}"></td>
+        <td th:text="${borrowing.borrowDate}"></td>
+        <td th:text="${borrowing.returnDate}"></td>
+        <td>
+            <button class="action-btn return-btn"
+                    th:onclick="'returnBook(' + ${borrowing.id} + ')'">Вернуть</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="../static/js/borrowings.js"></script>
+
+</body>
+</html>

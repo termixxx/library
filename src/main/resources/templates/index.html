@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System</title>
+  <link rel="stylesheet" href="../static/style/index.css">
+</head>
+<body>
+<div class="header">
+  <h1>Library Management System</h1>
+</div>
+
+<div class="container">
+  <div class="stats">
+    <div class="stat-item">
+      <h3>Всего книг</h3>
+      <div class="stat-number" th:text="${booksCount}">0</div>
+    </div>
+
+    <div class="stat-item">
+      <h3>Всего читателей</h3>
+      <div class="stat-number" th:text="${clientsCount}">0</div>
+    </div>
+
+    <div class="stat-item">
+      <h3>Активных выдач</h3>
+      <div class="stat-number" th:text="${borrowingsCount}">0</div>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <div class="card">
+      <h2>Управление книгами</h2>
+      <p>Просмотр, добавление, редактирование и удаление книг в библиотечном фонде</p>
+      <a th:href="@{/web/books}" class="btn btn-books">Перейти к книгам</a>
+    </div>
+
+    <div class="card">
+      <h2>Управление читателями</h2>
+      <p>Управление информацией о читателях и их членством</p>
+      <a th:href="@{/web/clients}" class="btn btn-clients">Перейти к читателям</a>
+    </div>
+
+    <div class="card">
+      <h2>Учёт выдачи</h2>
+      <p>Отслеживание выдачи и возврата книг</p>
+      <a th:href="@{/web/borrowings}" class="btn btn-borrowings">Перейти к выдачам</a>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Library Management System &copy; 2025</p>
+</div>
+</body>
+</html>
